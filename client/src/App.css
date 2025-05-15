@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +6,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
   color: #333;
   background-attachment: fixed;
@@ -50,7 +51,7 @@ body {
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: #1e293b;
-  text-align: center; 
+  text-align: center;
 }
 
 .avatar-grid {
@@ -80,6 +81,8 @@ body {
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  align-items: center;
+  text-align: center;
 }
 
 .avatar-card:hover {
@@ -195,7 +198,6 @@ body {
   border-radius: 0 0 0.5rem 0.5rem;
 }
 
-/* Form styles */
 .form-title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -261,4 +263,53 @@ body {
   margin: 0;
   color: #f5f1f1;
   font-size: 1.1rem;
+}
+
+.success-message {
+  color: #10b981;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.typing-container {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+.modal-footer {
+  background-color: #f3f4f6;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between; /* Pushes buttons to opposite sides */
+  align-items: center;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+/* Style for the Close button (left side) */
+.btn-close {
+  background-color: transparent;
+  color: #3b82f6;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+
+.btn-close:hover {
+  text-decoration: underline;
+}
+
+/* Style for the Save Changes button (right side) */
+.btn-save {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-save:hover {
+  background-color: #2563eb;
 }
