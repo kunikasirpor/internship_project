@@ -12,7 +12,7 @@ import companionImg from './images/companion.png';
 const welcomeMessages = [
   "Welcome back! Create and manage your AI avatars",
   "Ready to build something amazing?",
-  "Let's create some AI magic!"
+  "Let's create your avatar!"
 ];
 
 const dummyAvatars = [
@@ -158,12 +158,14 @@ const CreateAvatarForm = () => {
 };
 
 function App() {
-  const [avatars] = useState(dummyAvatars);
+  const [avatars, setAvatars] = useState(dummyAvatars);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentAvatar, setCurrentAvatar] = useState(null);
+  const [editedName, setEditedName] = useState('');
 
   const handleEditAvatar = (avatar) => {
     setCurrentAvatar(avatar);
+    setEditedName(avatar.name);
     setIsModalOpen(true);
   };
 
@@ -172,9 +174,21 @@ function App() {
     setIsModalOpen(true);
   };
 
+  const handleSaveChanges = () => {
+    if (currentAvatar && editedName.trim()) {
+      setAvatars(prevAvatars => 
+        prevAvatars.map(avatar => 
+          avatar.id === currentAvatar.id 
+            ? { ...avatar, name: editedName } 
+            : avatar
+        )
+      );
+      setIsModalOpen(false);
+    }
+  };
+
   return (
     <div className="dashboard">
-      {/* Header */}
       <header className="dashboard-header">
         <div className="container">
           <h1>AI Dashboard</h1>
@@ -182,18 +196,15 @@ function App() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="container main-content">
         <h2>Your Avatars</h2>
         
-        {/* Avatar Grid */}
         <div className="avatar-grid">
           {avatars.map(avatar => (
             <AvatarCard key={avatar.id} avatar={avatar} onEdit={handleEditAvatar} />
           ))}
         </div>
         
-        {/* Floating Add Button */}
         <button 
           className="floating-button"
           onClick={handleCreateAvatar}
@@ -202,7 +213,6 @@ function App() {
         </button>
       </main>
       
-      {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {currentAvatar ? (
           <div>
@@ -219,9 +229,17 @@ function App() {
               <input 
                 type="text" 
                 className="form-control"
-                defaultValue={currentAvatar.name}
+                value={editedName}
+                onChange={(e) => setEditedName(e.target.value)}
               />
             </div>
+            <button 
+              className="btn btn-primary"
+              onClick={handleSaveChanges}
+              style={{ marginRight: '10px' }}
+            >
+              Save Changes
+            </button>
           </div>
         ) : (
           <CreateAvatarForm />
